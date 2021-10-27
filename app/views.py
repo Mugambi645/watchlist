@@ -1,13 +1,13 @@
 from os import popen
 from flask import render_template
 from app import app
-from .requests import getMovies
+from .requests import getMovies, get_movie
 @app.route("/")
 def index():
     """
     view root page that returns the index page and its data
     """
-    message = "Hello world"
+    message = ""
     #movies
     popular_movies = getMovies("popular")
     upcoming_movie = getMovies("upcoming")
@@ -18,9 +18,12 @@ def index():
     return render_template("index.html", message = message, title = title, popular = popular_movies, upcoming = upcoming_movie, showing = get_showing_movies)
 
 
-@app.route("/movie/<int:movie_id>")
-def movie(movie_id):
+#movie details
+@app.route("/movie/<int:id>")
+def movie(id):
     """
-    view movie page that returns the movie details page and its data
+    view function that returns movie id and its data
     """
-    return render_template("movie.html", id=movie_id)
+    movie = get_movie(id)
+    title = f"{movie.title}"
+    return render_template("movie.html", title = title, movie = movie)
