@@ -1,1 +1,1 @@
-web: gunicorn run:watchlist
+web: gunicorn manage:app
