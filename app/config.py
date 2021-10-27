@@ -19,6 +19,6 @@ class DevConfig(Config):
     The parent configuration class with general configuration settings
 
     """
-    DEBUG=True
+    DEBUG=False
     
 
