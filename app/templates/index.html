@@ -8,23 +8,35 @@
 {% endblock %}
 <!--content block-->
 {% block content %}
+<style>
+    body {
+        background-image: url(../static/images/background.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-width: 100%;
+        min-height: 100%;
+    }
+</style>
+<body>
         <h1>{{ message }}</h1>
         <!--Popular movie section-->
-        <h3>Popular movies</h3>
-        <ul>
+        <h3 style="margin: 5rem; text-align: center; color: white;">Popular movies</h3>
+        <ul style="margin: 3rem;">
             {{ macro.displayMovieList(popular)}}
         </ul>
 
         <!--upcoming movies-->
-        <h3>Upcoming movies</h3>
+        <h3 style="margin: 5rem; margin-bottom: 3rem; text-align: center; color: white;">Upcoming movies</h3>
         <ul>
             {{ macro.displayMovieList(upcoming)}}
         </ul>
         <!--Now showing movie-->
-        <h3>Movies showing now</h3>
+        <h3 style="margin: 5rem; margin-top: 5rem; text-align: center; color: white;">Movies showing now</h3>
         <ul>
+            
             {{ macro.displayMovieList(now_showing)}}
         </ul> 
+        </div>
         {% endblock %}
     </body>
 </html>
