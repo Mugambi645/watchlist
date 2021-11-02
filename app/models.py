@@ -1,3 +1,4 @@
+from . import db
 class Movie:
     """
     Movie class to define movie objects
@@ -10,3 +11,12 @@ class Movie:
         self.poster = 'https://image.tmdb.org/t/p/w500/' + poster
         self.vote_average = vote_average
         self.vote_count = vote_count
+
+#database models
+class User(db.Model):
+    __tablename__ = "users"
+    id = db.Column(db.Integer, primary_key = True)
+    username = db.Column(db.String(255))
+
+    def __repr__(self):
+        return f"User {self.username}"
