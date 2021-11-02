@@ -1,7 +1,10 @@
+from instance.config import MOVIE_API_KEY
+import os
 class Config:
     """
     General configuration class
     """
+    
     MOVIE_API_BASE_URL = 'https://api.themoviedb.org/3/movie/{}?api_key={}'
     
 class ProdConfig(Config):
@@ -21,3 +24,9 @@ class DevConfig(Config):
     """
     DEBUG=True
 
+
+
+config_options = {
+    'development':DevConfig,
+    'production':ProdConfig
+    }   

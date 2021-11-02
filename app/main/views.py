@@ -1,8 +1,8 @@
 from os import popen
 from flask import render_template,request,redirect,url_for
-from app import app
-from .requests import getMovies, get_movie,search_movie
-@app.route("/")
+from . import main
+from ..requests import getMovies, get_movie,search_movie
+@main.route("/")
 def index():
     """
     view root page that returns the index page and its data
@@ -21,7 +21,7 @@ def index():
 
 
 #movie details
-@app.route("/movie/<int:id>")
+@main.route("/movie/<int:id>")
 def movie(id):
     """
     view function that returns movie id and its data
@@ -32,7 +32,7 @@ def movie(id):
 
 
 #search movie function
-@app.route("/search/<movie_name>")
+@main.route("/search/<movie_name>")
 def search(movie_name):
     """
     View function to display the search results

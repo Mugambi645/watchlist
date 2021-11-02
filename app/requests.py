@@ -1,13 +1,20 @@
-from app import app
+from os import name
 import urllib.request, json
-from .models import movie
+from .models import Movie
 
-Movie = movie.Movie
-#getting api key
-api_key = app.config['MOVIE_API_KEY']
+# Getting api key
+api_key = None
+# Getting the news base url
+base_url = None
+# getting articles url
+#articles_url = None
 
-#base url
-base_url = app.config["MOVIE_API_BASE_URL"]
+def configure_request(app):
+    global api_key, base_url, articles_url
+    api_key = '2af5841cd2676c9d6599b320fc1cfc86'
+    base_url = app.config['MOVIE_API_BASE_URL']
+    #articles_url =  app.config['ARTICLES_URL']
+
 
 def process_results(movie_list):
     """
