@@ -24,7 +24,15 @@ def index():
     else:
         return render_template("index.html", message = message, title = title, popular = popular_movies, upcoming = upcoming_movie, showing = get_showing_movies)
 
+#profile
+@main.route('/user/<uname>')
+def profile(uname):
+    user = User.query.filter_by(username = uname).first()
 
+    if user is None:
+        abort(404)
+
+    return render_template("profile/profile.html", user = user)
 #movie details
 @main.route("/movie/<int:id>")
 def movie(id):
