@@ -1,7 +1,10 @@
 from os import popen
-from flask import render_template,request,redirect,url_for
+from flask import render_template,request,redirect,url_for,abort
 from . import main
 from ..requests import getMovies, get_movie,search_movie
+
+from ..models import Review,User
+from ..forms import ReviewForm
 @main.route("/")
 def index():
     """
@@ -28,7 +31,8 @@ def movie(id):
     """
     movie = get_movie(id)
     title = f"{movie.title}"
-    return render_template("movie.html", title = title, movie = movie)
+    review = Review.get_reviews(movie.id)
+    return render_template("movie.html", title = title, movie = movie, review = review)
 
 
 #search movie function
@@ -44,3 +48,29 @@ def search(movie_name):
     return render_template("search.html", movies=searched_movies)
 
 
+
+@main.route('/movie/review/new/<int:id>', methods = ['GET','POST'])
+def new_review(id):
+    form = ReviewForm()
+    movie = get_movie(id)
+
+    if form.validate_on_submit():
+        title = form.title.data
+        review = form.review.data
+        new_review = Review(movie.id,title,movie.poster,review)
+    
+        new_review.save_review()
+        return redirect(url_for('movie',id = movie.id))
+
+    title = f'{movie.title} review'
+    return render_template('new_review.html',title = title, review_form=form, movie=movie)
+
+
+@main.route('/user/<uname>')
+def profile(uname):
+    user = User.query.filter_by(username = uname).first()
+
+    if user is None:
+        abort(404)
+
+    return render_template("profile/profile.html", user = user)
