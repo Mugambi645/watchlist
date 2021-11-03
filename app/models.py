@@ -1,7 +1,9 @@
+#from typing_extensions import Required
 from werkzeug.security import check_password_hash, generate_password_hash
 from . import db
 from flask_login import UserMixin
 from . import login_manager
+from flask import Flask
 class Movie:
     """
     Movie class to define movie objects
